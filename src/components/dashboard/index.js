@@ -203,6 +203,7 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
 
+
 const HomepageLayout = () => (
   <ResponsiveContainer>
     <Segment style={{ padding: '1em 0em' }} vertical>

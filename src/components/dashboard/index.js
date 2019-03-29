@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import {
   Button,
   Container,
-  Divider,
   Grid,
   Header,
   Icon,
@@ -25,37 +24,6 @@ const getWidth = () => {
   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
 }
 
-const HomepageHeading = ({ mobile }) => (
-  <Container text>
-    <Header
-      as='h1'
-      content='Manual labor sucks, dude.'
-      inverted
-      style={{
-        fontSize: mobile ? '2em' : '3em',
-        fontWeight: 'normal',
-        marginBottom: 0,
-        marginTop: mobile ? '1.5em' : '3em',
-      }}
-    />
-    <Header
-      as='h2'
-      content='Ctrim is a business management platform inspired by the way you work.
-              From small to large scale business, 
-              you can keep track of products, profits, employees and collaborate with other business owners.'
-      inverted
-      style={{
-        fontSize: mobile ? '1.5em' : '1.7em',
-        fontWeight: 'normal',
-        marginTop: mobile ? '0.5em' : '1.5em',
-      }}
-    />
-  </Container>
-)
-
-HomepageHeading.propTypes = {
-  mobile: PropTypes.bool,
-}
 
 class DesktopContainer extends Component {
   state = {}
@@ -79,7 +47,7 @@ class DesktopContainer extends Component {
             className='masthead'
             textAlign='center'
             style={{ 
-              minHeight: 500,
+              minHeight: 750,
               padding: '2em 0em'
             }}
             vertical
@@ -96,7 +64,6 @@ class DesktopContainer extends Component {
                 >
                   Ctrim
                 </Menu.Item>
-                <Menu.Item as='a' >Why ctrim ?</Menu.Item>
                 <Menu.Item position='right'>
                   <Button as='a' inverted={!fixed} >
                     Log in
@@ -107,7 +74,6 @@ class DesktopContainer extends Component {
                 </Menu.Item>
               </Container>
             </Menu>
-            <HomepageHeading />
           </Segment>
         </Visibility>
 
@@ -178,7 +144,6 @@ class MobileContainer extends Component {
                 </Menu.Item>
               </Menu>
             </Container>
-            <HomepageHeading mobile />
           </Segment>
 
           {children}
@@ -206,55 +171,7 @@ ResponsiveContainer.propTypes = {
 
 const HomepageLayout = () => (
   <ResponsiveContainer>
-    <Segment style={{ padding: '1em 0em' }} vertical>
-      <Container text>
-        <p style={{ fontSize: '1.33em', padding: '1em 0em'}}>
-              Ctrim is a business management platform inspired by the way you work.
-              From small to large scale business, 
-              you can keep track of products, profits, employees and collaborate with other business owners.
-          </p>
-        <Divider
-            as='h4'
-            className='header'
-            horizontal
-            style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-          >
-            <a href='#gfg'>Why ctrim</a>
-        </Divider>
-        <p style={{ fontSize: '1.33em' }}>
-              Ctrim is a business management platform inspired by the way you work.
-              From small to large scale business, 
-              you can keep track of products, profits, employees and collaborate with other business owners.
-        </p>
-        <Divider
-          as='h4'
-          className='header'
-          horizontal
-          style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-        >
-          <a href='#gfg'>What are we solving for?</a>
-        </Divider>
-        <p style={{ fontSize: '1.33em' }}>
-              Ctrim is a business management platform inspired by the way you work.
-              From small to large scale business, 
-              you can keep track of products, profits, employees and collaborate with other business owners.
-        </p>
-        <Divider
-          as='h4'
-          className='header'
-          horizontal
-          style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-        >
-          <a href='#gfg'>How to use</a>
-        </Divider>
-        <p style={{ fontSize: '1.33em' }}>
-              Ctrim is a business management platform inspired by the way you work.
-              From small to large scale business, 
-              you can keep track of products, profits, employees and collaborate with other business owners.
-        </p>
-      </Container>
-    </Segment>
-    <Segment inverted vertical style={{ padding: '5em 0em' }}>
+    <Segment inverted vertical style={{ padding: '5em 0em', position: 'relative', bottom: '0px' }}>
       <Container>
         <Grid divided inverted stackable>
           <Grid.Row>

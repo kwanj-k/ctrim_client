@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HomepageLayout from './components/dashboard';
+import HomepageLayout from './components/home';
 
 
 class App extends Component {

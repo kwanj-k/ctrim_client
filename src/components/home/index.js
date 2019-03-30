@@ -12,10 +12,14 @@ import {
   Segment,
   Sidebar,
   Visibility,
+  Modal,
+
 } from 'semantic-ui-react'
 
 
-import './dash.css';
+import './home.css';
+import Login from '../login';
+import SignUp from '../signup';
 
 
 const getWidth = () => {
@@ -26,7 +30,15 @@ const getWidth = () => {
 
 
 class DesktopContainer extends Component {
-  state = {}
+  state = { 
+    openLogin: false,
+    openSignup: false
+   }
+
+  showLogin = dimmer => () => this.setState({ dimmer, openLogin: true })
+  showSignup = dimmer => () => this.setState({ dimmer, openSignup: true })
+
+  close = () => this.setState({ openLogin: false, openSignup: false})
 
   hideFixedMenu = () => this.setState({ fixed: false })
   showFixedMenu = () => this.setState({ fixed: true })
@@ -34,6 +46,7 @@ class DesktopContainer extends Component {
   render() {
     const { children } = this.props
     const { fixed } = this.state
+    const { openLogin, openSignup, dimmer } = this.state
 
     return (
       <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
@@ -65,18 +78,27 @@ class DesktopContainer extends Component {
                   Ctrim
                 </Menu.Item>
                 <Menu.Item position='right'>
-                  <Button as='a' inverted={!fixed} >
-                    Log in
+                  <Button as='a' inverted={!fixed}
+                   onClick={this.showLogin('blurring')} >
+                    LogIn
                   </Button>
-                  <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                    Sign Up
+                </Menu.Item >
+                <Modal dimmer={dimmer} open={openLogin} onClose={this.close} className='login-form'>
+                  < Login />
+                </Modal>
+                <Menu.Item>
+                  <Button as='a' inverted={!fixed}
+                    onClick={this.showSignup('blurring')} >
+                      SignUP
                   </Button>
-                </Menu.Item>
+                </Menu.Item >
+                <Modal dimmer={dimmer} open={openSignup} onClose={this.close} className='login-form'>
+                  < SignUp />
+                </Modal>
               </Container>
             </Menu>
           </Segment>
         </Visibility>
-
         {children}
       </Responsive>
     )
@@ -88,7 +110,15 @@ DesktopContainer.propTypes = {
 }
 
 class MobileContainer extends Component {
-  state = {}
+  state = { 
+    openLogin: false,
+    openSignup: false
+   }
+
+  showLogin = dimmer => () => this.setState({ dimmer, openLogin: true })
+  showSignup = dimmer => () => this.setState({ dimmer, openSignup: true })
+
+  close = () => this.setState({ openLogin: false, openSignup: false})
 
   handleSidebarHide = () => this.setState({ sidebarOpened: false })
 
@@ -97,6 +127,7 @@ class MobileContainer extends Component {
   render() {
     const { children } = this.props
     const { sidebarOpened } = this.state
+    const { openLogin, openSignup, dimmer } = this.state
 
     return (
       <Responsive
@@ -113,18 +144,29 @@ class MobileContainer extends Component {
           visible={sidebarOpened}
         >
           <Menu.Item as='a' active>
-            Home
+            Ctrim
           </Menu.Item>
-          <Menu.Item as='a'>Work</Menu.Item>
-          <Menu.Item as='a'>Company</Menu.Item>
-          <Menu.Item as='a'>Careers</Menu.Item>
-          <Menu.Item as='a'>Log in</Menu.Item>
-          <Menu.Item as='a'>Sign Up</Menu.Item>
+          <Menu.Item as='a'
+            onClick={this.showLogin('blurring')}
+          >
+            Log in
+          </Menu.Item>
+          <Modal dimmer={dimmer} open={openLogin} onClose={this.close} className='mobile-form'>
+            < Login />
+          </Modal>
+          <Menu.Item as='a'
+          onClick={this.showSignup('blurring')}>
+            Sign Up
+          </Menu.Item>
+          <Modal dimmer={dimmer} open={openSignup} onClose={this.close} className='mobile-form'>
+            < SignUp />
+          </Modal>
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened}>
           <Segment
             inverted
+            className='masthead'
             textAlign='center'
             style={{ minHeight: 350, padding: '1em 0em' }}
             vertical
@@ -133,14 +175,6 @@ class MobileContainer extends Component {
               <Menu inverted pointing secondary size='large'>
                 <Menu.Item onClick={this.handleToggle}>
                   <Icon name='sidebar' />
-                </Menu.Item>
-                <Menu.Item position='right'>
-                  <Button as='a' inverted>
-                    Log in
-                  </Button>
-                  <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
-                    Sign Up
-                  </Button>
                 </Menu.Item>
               </Menu>
             </Container>
@@ -195,7 +229,9 @@ const HomepageLayout = () => (
                 Ctrim.Inc
               </Header>
               <p>
-                Sign up today and let us worry about the math.
+                Ctrim is a business management platform inspired by the way you work.
+                From small to large scale business, 
+                you can keep track of products, profits, employees and collaborate with other business owners.
               </p>
             </Grid.Column>
           </Grid.Row>

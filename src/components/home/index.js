@@ -17,7 +17,7 @@ import {
 import './home.css';
 import Login from '../login';
 import SignUp from '../signup';
-import Footer from '../common/footer';
+import Footer from '../common/Footer';
 
 
 const getWidth = () => {

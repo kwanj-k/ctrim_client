@@ -6,13 +6,20 @@ import {
     Button,
     Message,
     Segment,
+    Modal
 } from 'semantic-ui-react'
+import Login from '../login';
 
 
 class SignUp extends Component {
-   
+    state = { 
+        openLogin: false
+       }
+    showLogin = dimmer => () => this.setState({ dimmer, openLogin: true }) 
+    close = () => this.setState({ openLogin: false, openSignup: false})
     
     render (){
+        const { openLogin, dimmer } = this.state
         
         return ( 
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
@@ -37,7 +44,13 @@ class SignUp extends Component {
                         </Segment>
                     </Form>
                     <Message>
-                        Already registered? <a href='#hh'>LogIn</a>
+                        Already registered? <a href='#hh'
+                        onClick={this.showLogin('blurring')}>
+                            LogIn
+                        </a>
+                        <Modal dimmer={dimmer} open={openLogin} onClose={this.close} className='login-form'>
+                            < Login />
+                        </Modal>
                     </Message>
                 </Grid.Column>
             </Grid>

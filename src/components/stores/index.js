@@ -20,7 +20,7 @@ class StoreCard extends Component {
         const arr = _.values(this.props.stores['stores'])
         const stores = arr.map(store => {
             return(
-                <Card className='each-card' key={1}>
+                <Card className='each-card' key={store.pk}>
                     <Card.Content>
                         <Card.Header>{ store.name }</Card.Header>
                         <Card.Meta>Owned by Cecy</Card.Meta>

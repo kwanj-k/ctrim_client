@@ -17,6 +17,7 @@ import {
 import './home.css';
 import Login from '../login';
 import SignUp from '../signup';
+import Footer from '../common/Footer';
 
 
 const getWidth = () => {
@@ -201,6 +202,8 @@ ResponsiveContainer.propTypes = {
 
 
 const HomepageLayout = () => (
-  <ResponsiveContainer />
+  <ResponsiveContainer>
+    < Footer/>
+  </ResponsiveContainer>
 )
 export default HomepageLayout

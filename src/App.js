@@ -4,7 +4,7 @@ import { BrowserRouter,Route,Switch } from 'react-router-dom';
 import HomepageLayout from './components/home';
 import Dashboard from './components/dashboard';
 import login from './components/login';
-
+import Footer from './components/common/Footer';
 
 class App extends Component {
   render() {
@@ -16,6 +16,7 @@ class App extends Component {
             <Route exact path='/dashboard' component={Dashboard}/>
             <Route exact path='/login' component={login}/>
           </Switch>
+          < Footer />
         </div>
       </BrowserRouter>
     );

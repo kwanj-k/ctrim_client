@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import {
   Grid,
   Header,
@@ -11,10 +11,13 @@ import {
   Segment,
   Modal
 } from "semantic-ui-react";
+import jwt_decode from "jwt-decode";
 
 import "../home/home.css";
 import SignUp from "../signup";
-import { loginUser } from "../../actions/authActions";
+import { loginUser, setCurrentUser } from "../../actions/authActions";
+import isExpired from "../../utils/isExpired";
+
 
 class Login extends Component {
   constructor() {
@@ -28,6 +31,16 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    const token = localStorage.getItem("jwtToken");
+    if (token ) {
+      const decoded = jwt_decode(token);
+      const { setCurrentUser } = this.props;
+      const { exp } = decoded;
+      const expiryCheck = isExpired(exp)
+      if (!expiryCheck) {
+        setCurrentUser(decoded);
+      }
+    }
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
@@ -47,13 +60,12 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    
+
     this.props.loginUser(userData);
   };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    
   };
 
   showSignup = dimmer => () => this.setState({ dimmer, openSignup: true });
@@ -130,9 +142,8 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(
-    connect(
-      mapStateToProps,
-      { loginUser }
-    )(Login)
-  );
-  
+  connect(
+    mapStateToProps,
+    { loginUser, setCurrentUser }
+  )(Login)
+);

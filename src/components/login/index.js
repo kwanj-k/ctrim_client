@@ -32,12 +32,14 @@ class Login extends Component {
 
   componentDidMount() {
     const token = localStorage.getItem("jwtToken");
-    const decoded = jwt_decode(token);
-    const { setCurrentUser } = this.props;
-    const { exp } = decoded;
-    const expiryCheck = isExpired(exp)
-    if (!expiryCheck) {
-      setCurrentUser(decoded);
+    if (token ) {
+      const decoded = jwt_decode(token);
+      const { setCurrentUser } = this.props;
+      const { exp } = decoded;
+      const expiryCheck = isExpired(exp)
+      if (!expiryCheck) {
+        setCurrentUser(decoded);
+      }
     }
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");

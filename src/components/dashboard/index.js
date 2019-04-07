@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import StoreCard from '../stores';
+import Nav from '../common/DashNav';
 
 
 class Dashboard extends Component {
@@ -17,7 +18,8 @@ class Dashboard extends Component {
     render () {
         return (
             <div>
-                <StoreCard />
+                < Nav />
+                < StoreCard />
             </div>
         )
     }

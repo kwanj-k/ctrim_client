@@ -6,7 +6,6 @@ export const loadStores = () => dispatch => {
     return axiosConfig
         .get('stores/')
         .then( res => {
-            // console.log(res.data[0])
             dispatch(getStores(res.data));
         })
         .catch(err =>

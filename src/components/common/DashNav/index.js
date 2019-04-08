@@ -1,26 +1,75 @@
-import React from 'react';
-import ctrim from './ctrim.fgy';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import {
+    Button,
+    Modal,
+} from 'semantic-ui-react';
 
 import './nav.css';
+import ctrim from './ctrim.fgy';
+import { logoutUser } from '../../../actions/authActions';
+import  AddStore  from '../../storeform';
 
+class Nav extends Component {
+    state = { 
+        openAddStore: false,
+    }
 
-const Nav = () => {
-    return (
-        <div className='nav_marg'>
-            <nav>
-                <ul>
-                    <li>
-                        <img
-                        src={ctrim}
-                        className="img-responsive"
-                        alt="+Ctrim" />
-                    </li>
-                    <li ><Link to="/newstore" >AddStore</Link></li>
-                    <li ><Link to="/" >Logout</Link></li>
-                </ul>
-            </nav>
-        </div>
-    )
+    showModal = dimmer => () => this.setState({ dimmer, openAddStore: true })
+    close = () => this.setState({ openAddStore: false })
+
+    onClick = e => {
+        e.preventDefault();
+        this.props.logoutUser();
+        this.props.history.push('/')
+    };
+
+    render () {
+        const { openAddStore, dimmer } = this.state
+        return (
+            <div className='nav_marg'>
+                <nav>
+                    <ul>
+                        <li>
+                            <img
+                            src={ctrim}
+                            className="img-responsive"
+                            alt="+Ctrim" />
+                        </li>
+                        <li>
+                            <Button as='a'
+                                className='btn'
+                                onClick={this.showModal('blurring')}>
+                                AddStore
+                            </Button>
+                            <Modal dimmer={dimmer} open={openAddStore} onClose={this.close} className='login-form'>
+                                < AddStore />
+                            </Modal>
+                        </li>
+                        <li >
+                            <Button
+                                as='a'
+                                className='btn'
+                                onClick={this.onClick}>
+                                Logout
+                            </Button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        )
+    }
 }
-export default Nav;
+
+const mapStateToProps = state => (
+    state
+)
+
+
+export default withRouter(
+    connect(
+      mapStateToProps,
+      { logoutUser }
+    )(Nav)
+  );

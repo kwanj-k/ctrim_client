@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import {
+    Button,
+    Modal,
+} from 'semantic-ui-react';
 
 import './nav.css';
 import ctrim from './ctrim.fgy';
 import { logoutUser } from '../../../actions/authActions';
-
+import  AddStore  from '../../storeform';
 
 class Nav extends Component {
+    state = { 
+        openAddStore: false,
+    }
+
+    showModal = dimmer => () => this.setState({ dimmer, openAddStore: true })
+    close = () => this.setState({ openAddStore: false })
 
     onClick = e => {
         e.preventDefault();
@@ -18,6 +26,7 @@ class Nav extends Component {
     };
 
     render () {
+        const { openAddStore, dimmer } = this.state
         return (
             <div className='nav_marg'>
                 <nav>
@@ -28,14 +37,23 @@ class Nav extends Component {
                             className="img-responsive"
                             alt="+Ctrim" />
                         </li>
-                        <li ><Link to="/newstore" >AddStore</Link></li>
+                        <li>
+                            <Button as='a'
+                                className='btn'
+                                onClick={this.showModal('blurring')}>
+                                AddStore
+                            </Button>
+                            <Modal dimmer={dimmer} open={openAddStore} onClose={this.close} className='login-form'>
+                                < AddStore />
+                            </Modal>
+                        </li>
                         <li >
-                        <Button
-                            as='a'
-                            className='btn'
-                            onClick={this.onClick}>
-                            Logout
-                        </Button>
+                            <Button
+                                as='a'
+                                className='btn'
+                                onClick={this.onClick}>
+                                Logout
+                            </Button>
                         </li>
                     </ul>
                 </nav>

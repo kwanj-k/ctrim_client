@@ -12,12 +12,17 @@ import {
   Modal,
 
 } from 'semantic-ui-react'
+import jwt_decode from "jwt-decode";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 
 import './home.css';
 import Login from '../login';
 import SignUp from '../signup';
 import Footer from '../common/Footer';
+import isExpired from "../../utils/isExpired";
+import { setCurrentUser } from "../../actions/authActions";
 
 
 const getWidth = () => {
@@ -200,10 +205,46 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
 
+class HomepageLayout extends Component {
+  componentDidMount() {
+    const token = localStorage.getItem("jwtToken");
+    if (token ) {
+      const decoded = jwt_decode(token);
+      const { setCurrentUser } = this.props;
+      const expiryCheck = isExpired(token)
+      if (!expiryCheck) {
+        setCurrentUser(decoded);
+      }
+    }
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+  render() {
+    return(
+      <ResponsiveContainer>
+        < Footer/>
+      </ResponsiveContainer>
+    )
+  }
+}
 
-const HomepageLayout = () => (
-  <ResponsiveContainer>
-    < Footer/>
-  </ResponsiveContainer>
-)
-export default HomepageLayout
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { setCurrentUser }
+  )(HomepageLayout)
+);

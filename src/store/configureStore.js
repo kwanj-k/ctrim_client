@@ -5,6 +5,7 @@ import { logger } from 'redux-logger';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import rootReducer from '../reducers/rootReducer';
 import setAuthToken from '../utils/setAuthToken';
+import isExpired from '../utils/isExpired';
 
 
 let middlewares = [
@@ -19,7 +20,12 @@ if (process.env === 'development') {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const token = localStorage.getItem('jwtToken');
-setAuthToken(token);
+const expiryCheck = isExpired(token)
+if (!expiryCheck) {
+  setAuthToken(token);
+}else{
+  setAuthToken()
+}
 
 export default createStore(
   rootReducer,

@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Grid, Header, Form, Button, Segment } from "semantic-ui-react";
 
 import "../home/home.css";
-import { createStore } from '../../actions/storeActions';
+import { createStore } from "../../actions/storeActions";
 
 class AddStore extends Component {
   constructor() {
@@ -17,14 +17,14 @@ class AddStore extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
+    console.log(nextProps);
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
 
   onChange = e => {
-    console.log(this.props)
+    console.log(this.props);
     this.setState({ [e.target.name]: e.target.value });
   };
   onSubmit = e => {
@@ -32,8 +32,8 @@ class AddStore extends Component {
     const storeData = {
       name: this.state.name
     };
-
-    this.props.createStore(storeData);
+    const { createStore } = this.props;
+    createStore(storeData);
   };
 
   render() {
@@ -71,9 +71,16 @@ class AddStore extends Component {
 }
 
 AddStore.propTypes = {
-  createStore: PropTypes.func.isRequired
+  createStore: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => (state);
+const mapStateToProps = state => state;
 
-export default withRouter(connect(mapStateToProps,{createStore} )(AddStore));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { createStore }
+  )(AddStore)
+);

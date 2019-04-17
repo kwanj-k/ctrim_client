@@ -33,9 +33,9 @@ export const createStore =(storeData) => dispatch => {
     return axiosConfig
         .post('stores/', storeData)
         .then(res => {
-            console.log(res)
           const resData = res.data;
           dispatch(newStore(resData));
+          window.location.href = '/dashboard'
         })
         .catch(err => {
           dispatch({

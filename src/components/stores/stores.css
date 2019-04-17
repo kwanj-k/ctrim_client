@@ -1,7 +1,9 @@
 .cards {
-    margin-top: 40px !important;
+    margin-top: 45px !important;
 }
 
 .each-card {
     margin-left: 40px !important;
+    float: left;
+    margin-top: 25px !important;
 }

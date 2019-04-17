@@ -17,7 +17,6 @@ class AddStore extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -35,6 +34,7 @@ class AddStore extends Component {
     const { createStore } = this.props;
     createStore(storeData);
   };
+
 
   render() {
     const { errors } = this.state;

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Grid, Header, Form, Button, Segment } from "semantic-ui-react";
 
 import "../home/home.css";
+import { createStore } from "../../actions/storeActions";
 
 class AddStore extends Component {
   constructor() {
@@ -21,6 +22,20 @@ class AddStore extends Component {
     }
   }
 
+  onChange = e => {
+    console.log(this.props);
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  onSubmit = e => {
+    e.preventDefault();
+    const storeData = {
+      name: this.state.name
+    };
+    const { createStore } = this.props;
+    createStore(storeData);
+  };
+
+
   render() {
     const { errors } = this.state;
     return (
@@ -33,7 +48,7 @@ class AddStore extends Component {
           <Header as="h2" color="teal" textAlign="center">
             Add-new-store
           </Header>
-          <Form size="large">
+          <Form size="large" onSubmit={this.onSubmit}>
             <Segment stacked>
               <Form.Input
                 fluid
@@ -41,6 +56,7 @@ class AddStore extends Component {
                 iconPosition="left"
                 placeholder="Store name"
                 name="name"
+                onChange={this.onChange}
                 error={errors.name}
               />
               <Button color="teal" fluid size="large">
@@ -54,13 +70,17 @@ class AddStore extends Component {
   }
 }
 
-// Login.propTypes = {
-//   loginUser: PropTypes.func.isRequired,
-//   auth: PropTypes.object.isRequired,
-//   errors: PropTypes.object.isRequired,
-//   history: PropTypes.object.isRequired
-// };
+AddStore.propTypes = {
+  createStore: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => state;
 
-export default withRouter(connect(mapStateToProps,)(AddStore));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { createStore }
+  )(AddStore)
+);

@@ -35,8 +35,7 @@ class Login extends Component {
     if (token ) {
       const decoded = jwt_decode(token);
       const { setCurrentUser } = this.props;
-      const { exp } = decoded;
-      const expiryCheck = isExpired(exp)
+      const expiryCheck = isExpired(token)
       if (!expiryCheck) {
         setCurrentUser(decoded);
       }

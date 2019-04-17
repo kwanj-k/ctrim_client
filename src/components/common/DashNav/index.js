@@ -40,7 +40,7 @@ class Nav extends Component {
                         <li>
                             <Button as='a'
                                 className='btn'
-                                onClick={this.showModal('blurring')}>
+                                onClick={this.showModal('inverted')}>
                                 AddStore
                             </Button>
                             <Modal dimmer={dimmer} open={openAddStore} onClose={this.close} className='login-form'>

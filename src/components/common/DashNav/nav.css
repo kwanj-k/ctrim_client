@@ -1,63 +1,62 @@
 .btn {
-    /* margin-top: 5px !important;
+  /* margin-top: 5px !important;
     margin-left: px !important; */
-    margin: 5px !important;
+  margin: 5px !important;
 }
 
 nav {
-    width: 100%;
-    background: #0A0908;
-    top: 0;
-    left: 4px;
-    right: 16px;
-    position: fixed;
+  width: 100vw;
+  background: #0a0908;
+  top: 0;
+  position: fixed;
+  z-index: 1;
 }
 
 nav ul {
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 nav ul li {
-    list-style: none;
-    flex-grow: 1;
-    float: left;
-    text-align: center;
-    width: 16.6667%;
-    /* fallback for non-calc() browsers */
-    width: calc(100% / 6);
+  list-style: none;
+  flex-grow: 1;
+  float: left;
+  text-align: center;
+  width: 16.6667%;
+  /* fallback for non-calc() browsers */
+  width: calc(100% / 6);
 }
 
 nav ul li a {
-    display: block;
-    text-decoration: none;
-    color: #F2F4F3;
-    padding: 15px 0;
+  display: block;
+  text-decoration: none;
+  color: #f2f4f3;
+  padding: 15px 0;
 }
 
 .login {
-    color: aqua;
+  color: aqua;
 }
 
 nav ul li a:hover {
-    background-color: #292D28;
-    color: ivory;
+  background-color: #292d28;
+  color: ivory;
 }
 
 nav ul li a.active {
-    background-color: #292D28;
-    color: ivory;
+  background-color: #292d28;
+  color: ivory;
 }
 
 .img-responsive {
-    padding-top: 5px;
-    max-height: 45px;
+  padding-top: 5px;
+  max-height: 45px;
 }
 
 .logohead {
-    color: ivory;
-    display: inline;
+  color: ivory;
+  display: inline;
 }

@@ -20,11 +20,14 @@ if (process.env === 'development') {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const token = localStorage.getItem('jwtToken');
-const expiryCheck = isExpired(token)
-if (!expiryCheck) {
-  setAuthToken(token);
-}else{
-  setAuthToken()
+if (token ) {
+  const expiryCheck = isExpired(token)
+  if (!expiryCheck) {
+    setAuthToken(token);
+  }
+  else{
+    setAuthToken()
+  }
 }
 
 export default createStore(

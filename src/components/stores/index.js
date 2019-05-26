@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { Button, Card, Container } from 'semantic-ui-react'
 
 import './stores.css';
-import { loadStores } from '../../actions/storeActions';
+import { loadStores, deleteStore } from '../../actions/storeActions';
 
 class StoreCard extends Component {
     componentWillMount() {
@@ -15,6 +15,10 @@ class StoreCard extends Component {
             this.props.loadStores();
         }
     }
+    onClick = (id) => {
+        const { deleteStore } = this.props;
+        deleteStore(id);
+      };
 
     storeCard () {
         const arr = _.values(this.props.stores['stores'])
@@ -33,8 +37,11 @@ class StoreCard extends Component {
                         <Button basic color='green'>
                             Open
                         </Button>
-                        <Button basic color='red'>
-                            Delete
+                        <Button 
+                            basic color='red'
+                            onClick={this.onClick(store.pk)}
+                        >
+                        Delete
                         </Button>
                         </div>
                     </Card.Content>
@@ -58,6 +65,7 @@ class StoreCard extends Component {
 
 StoreCard.propTypes = {
     loadStores: PropTypes.func.isRequired,
+    deleteStore: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 };
 
@@ -68,7 +76,10 @@ const mapStateToProps = (state) =>{
 export default withRouter(
     connect(
       mapStateToProps,
-      { loadStores }
+      {
+        loadStores,
+        deleteStore
+    }
     )(StoreCard)
   );
 

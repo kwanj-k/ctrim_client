@@ -2,7 +2,8 @@ import axiosConfig from '../axiosConfig';
 import {
     GET_STORES,
     GET_ERRORS,
-    CREATE_STORE
+    CREATE_STORE,
+    DELETE_STORE
 } from './types';
 
 // Get Stores
@@ -53,3 +54,22 @@ export const newStore = storeData => {
       payload: storeData
     };
   };
+
+// delete a store
+
+export const deleteStore =(storeId) => dispatch => {
+    return axiosConfig
+        .delete(`stores/${storeId}`)
+        .then(() => {
+          dispatch({
+            type: DELETE_STORE
+          });
+        })
+        .catch(err => {
+          dispatch({
+              type: GET_ERRORS,
+              payload: err.response.data
+            })
+          }
+        );
+    };

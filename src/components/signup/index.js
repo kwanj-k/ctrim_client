@@ -13,7 +13,7 @@ import {
 } from "semantic-ui-react";
 
 import Login from "../login";
-import { registerUser } from "../../actions/authActions";
+import { registerUser } from "../../redux/actions/authActions";
 
 class SignUp extends Component {
   constructor() {

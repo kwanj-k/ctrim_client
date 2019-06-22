@@ -1,4 +1,4 @@
-import axiosConfig from '../axiosConfig';
+import axiosConfig from '../../axiosConfig';
 import {
     GET_STORES,
     GET_ERRORS,

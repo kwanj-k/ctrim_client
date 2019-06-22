@@ -8,7 +8,7 @@ import {
 
 import './nav.css';
 import ctrim from './ctrim.fgy';
-import { logoutUser } from '../../../actions/authActions';
+import { logoutUser } from '../../../redux/actions/authActions';
 import  AddStore  from '../../storeform';
 
 class Nav extends Component {

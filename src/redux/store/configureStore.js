@@ -4,8 +4,8 @@ import { logger } from 'redux-logger';
 
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import rootReducer from '../reducers/rootReducer';
-import setAuthToken from '../utils/setAuthToken';
-import isExpired from '../utils/isExpired';
+import setAuthToken from '../../utils/setAuthToken';
+import isExpired from '../../utils/isExpired';
 
 
 let middlewares = [

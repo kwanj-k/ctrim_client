@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Grid, Header, Form, Button, Segment } from "semantic-ui-react";
 
 import "../home/home.css";
-import { createStore } from "../../actions/storeActions";
+import { createStore } from "../../redux/actions/storeActions";
 
 class AddStore extends Component {
   constructor() {

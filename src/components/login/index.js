@@ -15,7 +15,7 @@ import jwt_decode from "jwt-decode";
 
 import "../home/home.css";
 import SignUp from "../signup";
-import { loginUser, setCurrentUser } from "../../actions/authActions";
+import { loginUser, setCurrentUser } from "../../redux/actions/authActions";
 import isExpired from "../../utils/isExpired";
 
 

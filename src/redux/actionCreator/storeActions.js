@@ -4,7 +4,7 @@ import {
     GET_ERRORS,
     CREATE_STORE,
     DELETE_STORE
-} from './types';
+} from '../constants/actionTypes';
 
 // Get Stores
 export const loadStores = () => dispatch => {

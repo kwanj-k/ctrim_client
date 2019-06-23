@@ -22,7 +22,7 @@ import Login from '../login';
 import SignUp from '../signup';
 import Footer from '../common/Footer';
 import isExpired from "../../utils/isExpired";
-import { setCurrentUser } from "../../redux/actions/authActions";
+// import { setCurrentUser } from "../../redux/actions/authActions";
 
 
 const getWidth = () => {
@@ -245,6 +245,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { setCurrentUser }
+    {}
   )(HomepageLayout)
 );

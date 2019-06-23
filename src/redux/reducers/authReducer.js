@@ -1,21 +1,37 @@
-import isEmpty from '../../utils/is-empty';
-
-import { SET_CURRENT_USER } from '../actions/types';
+import {
+  REGISTER_USER, REGISTER_USER_SUCCESS, REGISTER_USER_FAILURE
+} from '../constants/actionTypes';
 
 const initialState = {
-  isAuthenticated: false,
+  isRegistered: false,
+  isLoading: false,
+  error: {},
   user: {}
 };
 
-export default function(state = initialState, action) {
+const registration = (state = initialState, action) => {
   switch (action.type) {
-    case SET_CURRENT_USER:
+    case REGISTER_USER:
+      return { ...state, isLoading: true, isRegistered: false };
+    case REGISTER_USER_SUCCESS:
       return {
         ...state,
-        isAuthenticated: !isEmpty(action.payload),
-        user: action.payload
+        isRegistered: false,
+        isLoading: false,
+        error: {},
+
       };
-    default:
-      return state;
+    case REGISTER_USER_FAILURE:
+      return {
+        ...state,
+        isRegistered: false,
+        isLoading: false,
+        error: {
+          error: action.error
+        }
+
+      };
   }
 }
+export default registration;
+

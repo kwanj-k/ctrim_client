@@ -2,7 +2,7 @@ import {
   GET_STORES,
   CREATE_STORE,
   DELETE_STORE
-} from '../actions/types';
+} from '../actionCreator/types';
 
 const initialState = {};
 

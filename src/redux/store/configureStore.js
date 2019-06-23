@@ -1,36 +1,27 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import createSagaMiddleWare from 'redux-saga';
 import { logger } from 'redux-logger';
 
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import rootReducer from '../reducers/rootReducer';
+import rootReducer from '../reducers'
+import rootSaga from '../middleware'
 import setAuthToken from '../../utils/setAuthToken';
 import isExpired from '../../utils/isExpired';
 
 
-let middlewares = [
-  thunk
-];
-const devMiddleware = [logger, reduxImmutableStateInvariant()];
-
-if (process.env === 'development') {
-  middlewares.concat(devMiddleware);
-}
-
+const sagaMiddleware = createSagaMiddleWare();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
+const middleware = composeEnhancers(applyMiddleware(sagaMiddleware, logger));
+const store = createStore(rootReducer, middleware);
 const token = localStorage.getItem('jwtToken');
-if (token ) {
-  const expiryCheck = isExpired(token)
-  if (!expiryCheck) {
-    setAuthToken(token);
-  }
-  else{
-    setAuthToken()
-  }
+if (token) {
+    const expiryCheck = isExpired(token)
+    if (!expiryCheck) {
+        setAuthToken(token);
+    }
+    else {
+        setAuthToken()
+    }
 }
+sagaMiddleware.run(rootSaga);
 
-export default createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(...middlewares))
-);
+export default store;

@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { Button, Card, Container } from 'semantic-ui-react'
 
 import './stores.css';
-import { loadStores, deleteStore } from '../../actions/storeActions';
+import { loadStores, deleteStore } from '../../redux/actions/storeActions';
 
 class StoreCard extends Component {
     componentWillMount() {

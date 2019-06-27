@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Grid, Header, Form, Button, Segment } from "semantic-ui-react";
 
 import "../home/home.css";
-import { createStore } from "../../actions/storeActions";
+import { createStore } from "../../redux/actions/storeActions";
 
 class AddStore extends Component {
   constructor() {
@@ -17,7 +17,6 @@ class AddStore extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -35,6 +34,7 @@ class AddStore extends Component {
     const { createStore } = this.props;
     createStore(storeData);
   };
+
 
   render() {
     const { errors } = this.state;

@@ -4,16 +4,17 @@ import {
   REGISTER_USER_FAILURE
 } from '../constants/actionTypes';
 
-export const registerUser = () => {
+export const registerUser = userData => {
   return {
     type: REGISTER_USER,
+    userData
   };
 };
 
-export const registerUserSuccess = userData => {
+export const registerUserSuccess = newUser => {
   return {
     type: REGISTER_USER_SUCCESS,
-    userData
+    newUser
   };
 };
 

@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Grid, Header, Form, Button, Segment } from "semantic-ui-react";
 
 import "../home/home.css";
-import { createStore } from "../../redux/actions/storeActions";
+// import { createStore } from "../../redux/actions/storeActions";
 
 class AddStore extends Component {
   constructor() {
@@ -23,7 +23,6 @@ class AddStore extends Component {
   }
 
   onChange = e => {
-    console.log(this.props);
     this.setState({ [e.target.name]: e.target.value });
   };
   onSubmit = e => {
@@ -81,6 +80,6 @@ const mapStateToProps = state => state;
 export default withRouter(
   connect(
     mapStateToProps,
-    { createStore }
+    // { createStore }
   )(AddStore)
 );

@@ -1,11 +1,8 @@
 import { combineReducers } from 'redux';
-import authReducer from './authReducer';
-import storeReducer from './storeReducer';
-import errorReducer from './errorReducer';
+import registration from './registrationReducer';
+
 const rootReducer = combineReducers({
-    auth: authReducer,
-    stores: storeReducer,
-    errors: errorReducer  
+    registration
 })
 
 export default rootReducer;

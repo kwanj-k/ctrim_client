@@ -8,8 +8,8 @@ import {
 
 import './nav.css';
 import ctrim from './ctrim.fgy';
-import { logoutUser } from '../../../redux/actions/authActions';
-import  AddStore  from '../../storeform';
+// import { logoutUser } from '../../../redux/actions/authActions';
+// import  AddStore  from '../../storeform';
 
 class Nav extends Component {
     state = { 
@@ -44,7 +44,7 @@ class Nav extends Component {
                                 AddStore
                             </Button>
                             <Modal dimmer={dimmer} open={openAddStore} onClose={this.close} className='login-form'>
-                                < AddStore />
+                                {/* < AddStore /> */}
                             </Modal>
                         </li>
                         <li >
@@ -70,6 +70,6 @@ const mapStateToProps = state => (
 export default withRouter(
     connect(
       mapStateToProps,
-      { logoutUser }
+      { }
     )(Nav)
   );

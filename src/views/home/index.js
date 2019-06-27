@@ -9,20 +9,17 @@ import {
   Segment,
   Sidebar,
   Visibility,
-  Modal,
-
+  Modal
 } from 'semantic-ui-react'
 import jwt_decode from "jwt-decode";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-
 import './home.css';
 import Login from '../login';
 import SignUp from '../signup';
-import Footer from '../common/Footer';
+import Footer from '../../components/Footer';
 import isExpired from "../../utils/isExpired";
-import { setCurrentUser } from "../../redux/actions/authActions";
 
 
 const getWidth = () => {
@@ -216,13 +213,10 @@ class HomepageLayout extends Component {
         setCurrentUser(decoded);
       }
     }
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/");
     }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -245,6 +239,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { setCurrentUser }
+    {}
   )(HomepageLayout)
 );

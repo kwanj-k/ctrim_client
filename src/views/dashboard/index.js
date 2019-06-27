@@ -4,17 +4,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import StoreCard from '../stores';
-import Nav from '../common/DashNav';
+import Nav from '../../components/DashNav';
 
 
 class Dashboard extends Component {
 
-    componentDidMount = () => {
-        const auth = this.props.auth.isAuthenticated
-        if(!auth){
-          this.props.history.push('/login')
-        }
-    };
     render () {
         return (
             <div>

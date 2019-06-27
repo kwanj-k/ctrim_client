@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter,Route,Switch } from 'react-router-dom';
 
-import HomepageLayout from './components/home';
-import Dashboard from './components/dashboard';
-import login from './components/login';
+import HomepageLayout from './views/home';
+import Dashboard from './views/dashboard';
+import login from './views/login';
 
 class App extends Component {
   render() {
